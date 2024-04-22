@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: Product Manager
+  datasource:
+    hikari:
+      pool-name: Products
+    url: jdbc:postgresql://localhost:5432/manager
+    username: manager
+    password: localPassword
