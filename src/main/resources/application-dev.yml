@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    hikari:
+      pool-name: Products
+    url: jdbc:postgresql://localhost:5432/manager
+    username: manager
+    password: localPassword
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
