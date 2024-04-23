@@ -6,4 +6,4 @@ services:
       - 'POSTGRES_PASSWORD=localPassword'
       - 'POSTGRES_USER=manager'
     ports:
-      - '5432'
+      - '5432:5432'

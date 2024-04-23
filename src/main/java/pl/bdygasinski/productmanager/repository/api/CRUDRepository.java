@@ -12,7 +12,7 @@ interface CRUDRepository <T extends AbstractEntity, ID> {
 
     Optional<T> findById(ID id);
 
-    T save(T product);
+    T save(T entity);
 
-    void deleteById(ID id);
+    void delete(T entity);
 }
