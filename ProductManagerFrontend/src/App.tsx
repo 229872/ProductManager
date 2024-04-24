@@ -1,8 +1,9 @@
 import './App.css'
+import TableWithPaginationAndSorting from './components/TableWithPaginationAndSorting';
  
 function App() {
   return <>
-    Hello World
+    <TableWithPaginationAndSorting />
   </> 
 }
 

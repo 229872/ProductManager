@@ -1,5 +1,6 @@
 package pl.bdygasinski.productmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -12,6 +13,7 @@ import lombok.experimental.SuperBuilder;
 @ToString
 @EqualsAndHashCode
 
+@JsonIgnoreProperties(value = "version")
 @MappedSuperclass
 public abstract class AbstractEntity {
 
