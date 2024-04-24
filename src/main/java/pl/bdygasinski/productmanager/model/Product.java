@@ -1,5 +1,6 @@
 package pl.bdygasinski.productmanager.model;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -7,7 +8,6 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -26,7 +26,8 @@ public class Product extends AbstractEntity {
     @Column(nullable = false, length = 100)
     private String name;
 
-    @NotNull @Positive
+    @NotNull
+    @JsonUnwrapped
     @AttributeOverride(name = "value", column = @Column(name = "price", nullable = false))
     private Money price;
 

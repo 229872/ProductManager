@@ -10,14 +10,15 @@ import java.math.BigDecimal;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class TestData {
     public static final String NAME = "TV";
-    public static final Money PRICE = new Money(BigDecimal.valueOf(1000));
-    private static Long counter = 1L;
+    public static final Money PRICE = new Money(BigDecimal.valueOf(1000.0));
+    private static Long counter = 0L;
 
     public static void resetCounter() {
-        counter = 1L;
+        counter = 0L;
     }
 
     public static Product.ProductBuilder<?, ?> getDefaultBuilder() {
+        counter++;
         return Product.builder()
             .id(counter)
             .version(0L)
