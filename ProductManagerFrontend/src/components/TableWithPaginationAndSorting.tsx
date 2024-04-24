@@ -17,7 +17,7 @@ type ProductResponse = {
 export default function TableWithPaginationAndSorting() {
   const columns: string[] = ['ID', 'Name', 'Price']
   const rowsPerPageOptions = [5, 10, 15, 20]
-  const margin = {margin: '10vh 10vw'}
+  const margin = {margin: '14vh 10vw'}
   const headerStyling = {fontSize: 22, bgcolor: 'grey', color: 'white'}
 
   const [data, setData] = useState<Product[]>([])
