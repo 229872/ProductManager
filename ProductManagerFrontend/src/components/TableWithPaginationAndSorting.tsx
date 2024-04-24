@@ -1,6 +1,7 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TableSortLabel, Typography } from '@mui/material';
 import axios from 'axios';
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
+import { API } from '../constants'
 
 type Product = {
   id: number
@@ -32,7 +33,7 @@ export default function TableWithPaginationAndSorting() {
 
   const getData = async (pageNr: number, pageSize: number, sortBy: string, direction: 'asc' | 'desc') => {
     try {
-      const { data } = await axios.get<ProductResponse>(`http://localhost:8080/api/v1/products?page=${pageNr}&size=${pageSize}&sort=${sortBy},${direction}`)
+      const { data } = await axios.get<ProductResponse>(`${API}/products?page=${pageNr}&size=${pageSize}&sort=${sortBy},${direction}`)
       setData(data.content)
       setTotalElements(data.totalElements)
     } catch (e) {
@@ -55,6 +56,26 @@ export default function TableWithPaginationAndSorting() {
     getData(currentPage, newPageSize, sortBy, direction)
   }
 
+  const handleSortChange = (event: FormEvent<HTMLSpanElement>, column: string): void => {
+    
+    if (column === sortBy) {
+      const newDirection = direction === 'asc' ? 'desc' : 'asc'
+      changeDirection(newDirection)
+    } else {
+      changeSortBy(column)
+    }
+  }
+
+  const changeDirection = (newDirection: 'asc' | 'desc') => {
+    setDirection(newDirection)
+    getData(currentPage, pageSize, sortBy, newDirection)
+  }
+
+  const changeSortBy = (newSortBy: string) => {
+    setSortBy(newSortBy)
+    getData(currentPage, pageSize, newSortBy, direction)
+  }
+
   return (
     <Paper elevation={20} sx={margin}>
       <TableContainer sx={{maxHeight: '70vh'}}>
@@ -63,7 +84,7 @@ export default function TableWithPaginationAndSorting() {
             <TableRow>
               {
                 columns.map((v, key) => <TableCell key={key} sx={headerStyling}>
-                  <TableSortLabel>
+                  <TableSortLabel active={sortBy === v.toLowerCase()} direction={direction} onClick={e => handleSortChange(e, v.toLowerCase())}>
                     {v}
                   </TableSortLabel>
                 </TableCell>)
